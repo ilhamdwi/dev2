@@ -5,7 +5,7 @@
 date_default_timezone_set("Asia/Jakarta");
 
 // Jika sudah punya file koneksi sendiri, cukup include ini dan HAPUS blok mysqli_connect di bawah.
-include 'lib/db.php';
+include 'db.php';
 
 // Jika ada base path situs
 if (!defined('MY_PATH')) {
@@ -224,7 +224,7 @@ if ($stmt = $koneksi->prepare("SELECT title, link_article FROM article ORDER BY 
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<footer id="footer">
+<footer id="footer" class="site-footer">
 
     <div class="footer-top">
       <div class="container">
@@ -236,8 +236,8 @@ if ($stmt = $koneksi->prepare("SELECT title, link_article FROM article ORDER BY 
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="https://smaipbsoedirman2bekasi.sch.id/pages/alur-pendaftaran.html">Alur Pendaftaran</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="https://smaipbsoedirman2bekasi.sch.id/pages/rincian-biaya.html">Rincian Biaya</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4jPnJWL71X6wZlaBoKZl4gX-GzBJG-CeibpKueU2eh80Haw/viewform">Formulir Pendaftaran Siswa Baru</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="https://drive.google.com/drive/folders/1B954eiMsESeCmIX2SHJpWS951JG8vzei">Cetak Formulir Pendaftaran</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfD5JVIOOWf0HgZSksjunrxVtFpz3m4atpfNFDjVKiD589GrA/viewform">Formulir Pendaftaran Siswa Baru</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://drive.google.com/drive/u/0/folders/1S0Q3ixgAnlfA5oi3-IEJoYK2-huUIj1X">Cetak Formulir Pendaftaran</a></li>
             </ul>
           </div>
 
@@ -338,8 +338,10 @@ if ($stmt = $koneksi->prepare("SELECT title, link_article FROM article ORDER BY 
     </div>
 
     <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Nugro Company</span></strong>. All Rights Reserved
-      </div>
+        <div class="copyright">
+            <span class="copy-text">
+            &copy; Copyright <strong>Nugro Company</strong>. All Rights Reserved
+            </span>
+        </div>
     </div>
 </footer>

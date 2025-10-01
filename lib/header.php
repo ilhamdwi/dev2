@@ -41,71 +41,78 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>struktur.php">Struktur Organisasi</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>selayang.php">Selayang Pandang</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>visi-misi.php">Visi & Misi</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>sejarah.php">Sejarah</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>dataguru.php">Data Guru & Karyawan</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/struktur.php">Struktur Organisasi</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/selayang.php">Selayang Pandang</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/visimisi.php">Visi & Misi</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/sejarah.php">Sejarah</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/dataguru.php">Data Guru & Karyawan</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kurikulum</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>lurikulum.php">Kurikulum SMAI PB Soedirman 2</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>program.php">Program</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>kelulusan.php">Kelulusan Kelas XII</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>cbt.php">Computer Based Test (CBT)</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>presensi.php">Presensi Online</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kurikulum.php">Kurikulum SMAI PB Soedirman 2</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/program.php">Program</a></li>
+            <li><a class="dropdown-item" href="https://skl.smaipbsoedirman2bekasi.sch.id/">Kelulusan Kelas XII</a></li>
+            <li><a class="dropdown-item" href="https://cbt.smaipbsoedirman2bekasi.sch.id">Computer Based Test (CBT)</a></li>
+            <li><a class="dropdown-item" href="https://forms.office.com/Pages/ResponsePage.aspx?id=DmDqzG_jpE6obImnsfixvYpVGOp9VM9LnN-UWwOMsJlUNkxMRDE3WjlTNDRQV0w3WVNDNFdaUFlMQS4u">Presensi Online</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kesiswaan</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>kesiswaan.php">Kesiswaan</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>kegiatan.php">Info Kegiatan</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>ekstrakurikuler.php">Ekstrakurikuler</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>prestasi.php">Prestasi</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>tartib.php">Tata Tertib</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kesiswaan.php">Kesiswaan</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegiatan.php">Info Kegiatan</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/ekstrakurikuler2.php">Ekstrakurikuler</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/prestasi.php">Prestasi</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/tartib.php">Tata Tertib</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Humas</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>alumni.php">Alumni</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/alumni.php">Alumni</a></li>
           </ul>
         </li>
-
-        <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>ppdb.php">PPDB 2026/2027</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">PPDB 2026/2027</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kesiswaan.php">Alur Pendaftaran</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegiatan.php">Rincian Biaya</a></li>
+            <li><a class="dropdown-item" href="https://docs.google.com/forms/d/e/1FAIpQLScjQ7hV1dv5C5OhlwVjMMorXohl769o6vJ6LC9UWZggAZb6Yw/viewform">Formulir Pendaftaran Siswa Baru(Petugas) </a></li>
+            <li><a class="dropdown-item" href="https://drive.google.com/drive/u/0/folders/1S0Q3ixgAnlfA5oi3-IEJoYK2-huUIj1X">Cetak Formulir Pendaftaran PPDB 2026/2027</a></li>
+          </ul>
+        </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Galeri</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>fasilitas.php">Fasilitas Sekolah</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>eskul.php">Ekstrakurikuler</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/fasilitas.php">Fasilitas Sekolah</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/eskul.php">Ekstrakurikuler</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">E-Library</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>perpusdig.php">Perpustakaan Digital</a></li>
+            <li><a class="dropdown-item" href="https://sites.google.com/view/perpustakaan-digital-pangsoed-/tutorial">Perpustakaan Digital</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>kontak.php">Kontak</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>buku-tamu.php">Buku Tamu</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>pages/kontak.php">Kontak</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>pages/buku-tamu.php">Buku Tamu</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>download.php">Download</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">MPLS~PAIS</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>informasi.php">Informasi Umum MPLS~PAIS</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>kelompok.php">Kelompok MPLS~PAIS</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>seragam.php">Seragam MPLS~PAIS</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>kegmpls1.php">MPLS~PAIS Hari ke 1</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>mars.php">Mars Yasma PB Soedirman</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>Materi.php">Materi PAIS</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>kegmpls2.php">MPLS~PAIS Hari ke 2</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/informasi.php">Informasi Umum MPLS~PAIS</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kelompok.php">Kelompok MPLS~PAIS</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/seragam.php">Seragam MPLS~PAIS</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegmpls1.php">MPLS~PAIS Hari ke 1</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/mars.php">Mars Yasma PB Soedirman</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/materi.php">Materi PAIS</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegmpls2.php">MPLS~PAIS Hari ke 2</a></li>
           </ul>
         </li>
       </ul>

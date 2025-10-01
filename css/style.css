@@ -340,13 +340,9 @@ body{
 
 /* ===== Footer ===== */
 .site-footer{
-  background:
-    /* semburat hijau muda mirip header */
-    radial-gradient(900px 420px at 85% -10%, rgba(11,179,108,.10), transparent 55%),
-    linear-gradient(180deg, #ffffff 0%, var(--brand-50) 100%);
+  /* hijau muda solid; kalau mau ada semburat, bisa tambahkan radial-gradient di atasnya */
+  background:var(--brand-50);
   border-top: 1px solid var(--line);
-  color: var(--ink);
-  font-size: .95rem;
 }
 .site-footer .footer-top{ padding: 2.25rem 0; }
 .site-footer h5{ color:#143027; font-weight:600; letter-spacing:.2px; }
@@ -381,16 +377,18 @@ body{
 }
 
 /* Copyright bar */
+
 .site-footer .copyright{
-  padding: .75rem 0 1.25rem;
-  color: #56796d;
-  display:flex; align-items:center; justify-content:center;
+  display: block !important;     /* hilangkan flex yang bikin “kepecah” */
+  text-align: center !important; /* selalu di tengah di semua breakpoint */
+  padding: .9rem 0 1.1rem;       /* rapat tapi tetap rapi */
 }
-@media (min-width: 992px){
-  .site-footer .copyright{
-    justify-content: space-between;
-  }
+
+.site-footer .copyright .copy-text{
+  display: inline-block;         /* jadi satu baris utuh */
+  letter-spacing: .2px;
 }
+
 
 /* ----------------- Utilitas ----------------- */
 .small-muted{ color: var(--muted) }
