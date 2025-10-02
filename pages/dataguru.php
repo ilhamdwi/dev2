@@ -6,6 +6,7 @@
  * - Pencarian client-side (sembunyikan item & kolom kosong)
  ************************************************************/
 
+// ... (Bagian PHP data guru tetap sama) ...
 // error_reporting(E_ALL); ini_set('display_errors', 1);
 
 if (!defined('APP_ROOT')) {
@@ -27,11 +28,11 @@ $GURU_IMG_BASE = 'images/guru';
 
 /* Urutan kolom yang diinginkan (opsional). Sisanya alfabetis. */
 $JABATAN_PRIORITY = [
-  'Kepala Sekolah'            => 1,
-  'Wakasek Kurikulum'         => 2,
-  'Wakasek Kesiswaan'         => 3,
-  'Wakasek Sardik & Humas'    => 4,
-  'Kepala Tata Usaha'         => 5,
+  'Kepala Sekolah'        => 1,
+  'Wakasek Kurikulum'     => 2,
+  'Wakasek Kesiswaan'     => 3,
+  'Wakasek Sardik & Humas'=> 4,
+  'Kepala Tata Usaha'     => 5,
 ];
 
 /* Helper foto */
@@ -97,9 +98,9 @@ function inisial_nama(string $nama): string {
 <?php include APP_ROOT . "/head.php"; ?>
 
 <link href="<?php echo MY_PATH; ?>css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
+  /* ... (Bagian Style CSS tetap sama) ... */
   .page-head{
     background:
       radial-gradient(900px 420px at 90% -10%, rgba(134,239,172,.25), transparent 60%),
@@ -149,6 +150,27 @@ function inisial_nama(string $nama): string {
 
   .empty-state{ border:1px dashed #cde7dd; background:#f8fffb; border-radius:1rem; padding:1.25rem; color:#446356 }
   .no-result{ display:none; }
+  #whatsapp-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1050; /* Pastikan di atas elemen lain (seperti navbar) */
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #25d366; /* WhatsApp Green */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+  }
+  #whatsapp-btn:hover {
+    background-color: #128c7e;
+    transform: scale(1.05);
+  }
 </style>
 </head>
 <body>
@@ -165,7 +187,6 @@ function inisial_nama(string $nama): string {
 <section class="py-4">
   <div class="container container-narrow">
 
-    <!-- Pencarian -->
     <div class="search-wrap mb-3">
       <div class="input-group">
         <span class="input-group-text bg-transparent border-0"><i class="bi bi-search"></i></span>
@@ -189,7 +210,6 @@ function inisial_nama(string $nama): string {
       </div>
     <?php else: ?>
 
-      <!-- GRID: 3 kolom per baris (lg), 2 (md), 1 (sm) -->
       <div class="row g-3" id="colsContainer">
         <?php foreach ($groups as $jabatan => $list): ?>
           <div class="col-12 col-md-6 col-lg-4 group-wrap" data-group="<?php echo htmlspecialchars(mb_strtolower($jabatan,'UTF-8'), ENT_QUOTES); ?>">
@@ -208,10 +228,11 @@ function inisial_nama(string $nama): string {
                   <article class="staff staff-item" data-name="<?php echo htmlspecialchars($needle, ENT_QUOTES); ?>">
                     <?php if (!empty($row['gambar'])): ?>
                       <img class="photo"
-                           src="<?php echo htmlspecialchars($foto, ENT_QUOTES); ?>"
-                           alt="<?php echo htmlspecialchars($nama, ENT_QUOTES); ?>"
-                           loading="lazy"
-                           onerror="this.onerror=null;this.src='<?php echo MY_PATH; ?>img/not-images.png';">
+                              src="<?php echo htmlspecialchars($foto, ENT_QUOTES); ?>"
+                              alt="<?php echo htmlspecialchars($nama, ENT_QUOTES); ?>"
+                              loading="lazy"
+                              onerror="this.onerror=null;this.src='<?php echo MY_PATH; ?>img/not-images.png';"
+                              >
                     <?php else: ?>
                       <div class="avatar"><?php echo htmlspecialchars(inisial_nama($nama), ENT_QUOTES); ?></div>
                     <?php endif; ?>
@@ -235,6 +256,19 @@ function inisial_nama(string $nama): string {
 
   </div>
 </section>
+<?php
+// GANTI DENGAN NOMOR WHATSAPP ASLI ADMIN (format: 628xxxx)
+$whatsapp_number = '6282122241232'; 
+$whatsapp_text = 'Assalamualaikum Admin SMAI PB Soedirman 2, saya ingin bertanya tentang PPDB.';
+$whatsapp_link = 'https://wa.me/' . $whatsapp_number . '?text=' . urlencode($whatsapp_text);
+?>
+<a id="whatsapp-btn" 
+   href="<?php echo htmlspecialchars($whatsapp_link, ENT_QUOTES); ?>"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Hubungi kami via WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+</a>
 
 <?php include APP_ROOT . "/lib/footer.php"; ?>
 

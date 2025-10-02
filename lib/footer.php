@@ -232,10 +232,10 @@ if ($stmt = $koneksi->prepare("SELECT title, link_article FROM article ORDER BY 
 
           <!-- PPDB -->
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>PPDB 2023</h4>
+            <h4>PPDB 2025</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="https://smaipbsoedirman2bekasi.sch.id/pages/alur-pendaftaran.html">Alur Pendaftaran</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="https://smaipbsoedirman2bekasi.sch.id/pages/rincian-biaya.html">Rincian Biaya</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="pages/alur_pendaftaran">Alur Pendaftaran</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="pages/biaya.php">Rincian Biaya</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfD5JVIOOWf0HgZSksjunrxVtFpz3m4atpfNFDjVKiD589GrA/viewform">Formulir Pendaftaran Siswa Baru</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="https://drive.google.com/drive/u/0/folders/1S0Q3ixgAnlfA5oi3-IEJoYK2-huUIj1X">Cetak Formulir Pendaftaran</a></li>
             </ul>

@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /dev2/
+
+# Aturan untuk menangani URL Pencarian: /berita/search/keyword
+RewriteRule ^berita/search/([^/]+)/?$ search.php?q=$1 [L,QSA]
+
+# Tambahan (Opsional) - Jika Anda menggunakan Clean URL untuk Post:
+RewriteRule ^post/([^/]+)\.html$ post.php?link=$1 [L,QSA]

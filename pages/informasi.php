@@ -151,6 +151,27 @@ if ($stmt = $koneksi->prepare("SELECT id, category, descripsi FROM isimenu WHERE
   }
   .badge-id{ background:var(--accent); color:#fff; font-weight:700 }
   .desc{ padding:1rem 1rem .25rem 1rem; color:#173127 }
+  #whatsapp-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1050; /* Pastikan di atas elemen lain (seperti navbar) */
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #25d366; /* WhatsApp Green */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+  }
+  #whatsapp-btn:hover {
+    background-color: #128c7e;
+    transform: scale(1.05);
+  }
 </style>
 </head>
 <body>
@@ -197,6 +218,19 @@ if ($stmt = $koneksi->prepare("SELECT id, category, descripsi FROM isimenu WHERE
     <?php endif; ?>
   </div>
 </section>
+<?php
+// GANTI DENGAN NOMOR WHATSAPP ASLI ADMIN (format: 628xxxx)
+$whatsapp_number = '6282122241232'; 
+$whatsapp_text = 'Assalamualaikum Admin SMAI PB Soedirman 2, saya ingin bertanya tentang PPDB.';
+$whatsapp_link = 'https://wa.me/' . $whatsapp_number . '?text=' . urlencode($whatsapp_text);
+?>
+<a id="whatsapp-btn" 
+   href="<?php echo htmlspecialchars($whatsapp_link, ENT_QUOTES); ?>"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Hubungi kami via WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+</a>
 
 <?php include APP_ROOT . "/lib/footer.php"; ?>
 

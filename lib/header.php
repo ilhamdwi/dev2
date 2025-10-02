@@ -63,7 +63,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kesiswaan</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kesiswaan.php">Kesiswaan</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kesiswaan.php">Kesiswaan SMAI PB Soedirman 2 Bekasi</a></li>
             <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegiatan.php">Info Kegiatan</a></li>
             <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/ekstrakurikuler2.php">Ekstrakurikuler</a></li>
             <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/prestasi.php">Prestasi</a></li>
@@ -80,8 +80,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">PPDB 2026/2027</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kesiswaan.php">Alur Pendaftaran</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegiatan.php">Rincian Biaya</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/alur_pendaftaran.php">Alur Pendaftaran</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/biaya.php">Rincian Biaya</a></li>
             <li><a class="dropdown-item" href="https://docs.google.com/forms/d/e/1FAIpQLScjQ7hV1dv5C5OhlwVjMMorXohl769o6vJ6LC9UWZggAZb6Yw/viewform">Formulir Pendaftaran Siswa Baru(Petugas) </a></li>
             <li><a class="dropdown-item" href="https://drive.google.com/drive/u/0/folders/1S0Q3ixgAnlfA5oi3-IEJoYK2-huUIj1X">Cetak Formulir Pendaftaran PPDB 2026/2027</a></li>
           </ul>
@@ -102,7 +102,7 @@
         </li>
         <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>pages/kontak.php">Kontak</a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>pages/buku-tamu.php">Buku Tamu</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>download.php">Download</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo MY_PATH; ?>pages/download.php">Download</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">MPLS~PAIS</a>
           <ul class="dropdown-menu">
@@ -112,7 +112,7 @@
             <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegmpls1.php">MPLS~PAIS Hari ke 1</a></li>
             <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/mars.php">Mars Yasma PB Soedirman</a></li>
             <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/materi.php">Materi PAIS</a></li>
-            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/kegmpls2.php">MPLS~PAIS Hari ke 2</a></li>
+            <li><a class="dropdown-item" href="<?php echo MY_PATH; ?>pages/mplsday2.php">MPLS~PAIS Hari ke 2</a></li>
           </ul>
         </li>
       </ul>

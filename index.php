@@ -1,9 +1,15 @@
 <?php
+/************************************************************
+ * INDEX / HOMEPAGE — index.php (Full Update)
+ * Menggunakan style.css yang Anda berikan.
+ ************************************************************/
+
 // ======================= BOOTSTRAP APP =======================
 error_reporting(0); // HAPUS / set E_ALL saat debug
 
 // --- Koneksi DB & set variabel dasar dari DB --- //
-require_once __DIR__ . '/lib/db.php'; // harus mendefinisikan $koneksi (mysqli)
+// Asumsi $koneksi didefinisikan di sini
+require_once __DIR__ . '/lib/db.php'; 
 
 // Pastikan konstanta base path
 if (!defined('MY_PATH')) {
@@ -12,40 +18,34 @@ if (!defined('MY_PATH')) {
 
 // Fallback jika head/header/footer butuh variabel meta
 $title_web     = isset($title_web)     ? $title_web     : 'Situs Sekolah';
-$deskripsi_web = isset($deskripsi_web) ? $deskripsi_web : '';
-$keyword_web   = isset($keyword_web)   ? $keyword_web   : '';
+$deskripsi_web = isset($deskripsi_web) ? $deskripsi_web : 'Website resmi SMAI PB Soedirman 2 Bekasi. Informasi pendaftaran, kurikulum, dan kegiatan siswa.';
+$keyword_web   = isset($keyword_web)   ? $keyword_web   : 'SMAI, Soedirman, Bekasi, PPDB, sekolah favorit';
 $admin_web     = isset($admin_web)     ? $admin_web     : 'Admin';
 
 // ======================= HELPER =======================
-if (!function_exists('cek_img_tag')) {
-  // Ambil tag <img> pertama dari HTML konten, hapus width/height inline, tambahkan loading="lazy"
-  if (!function_exists('first_img_url')) {
+
+// Pastikan fungsi first_img_url ada (dibuat ringkas)
+if (!function_exists('first_img_url')) {
   function first_img_url(string $html, string $base = MY_PATH): string {
-    if (!$html || !preg_match('/<img\b[^>]*>/i', $html, $m)) {
+    if (!$html || !preg_match('/<img\b[^>]*src\s*=\s*(["\'])(.*?)\1/i', $html, $m)) {
       return rtrim($base,'/').'/img/not-images.png';
     }
-    $imgTag = $m[0];
-    foreach (['src','data-src','data-original','data-lazy-src'] as $a) {
-      if (preg_match('/\b'.$a.'\s*=\s*(["\'])(.*?)\1/i', $imgTag, $mm) && trim($mm[2])!=='') {
-        $src = trim($mm[2]);
-        break;
-      }
-    }
-    if (empty($src)) return rtrim($base,'/').'/img/not-images.png';
-    if (preg_match('~^(https?:)?//~i', $src)) return $src;           // sudah absolute
-    $src = preg_replace('~^(\./|\../)+~','',$src);                   // bersihkan ./ ../
-    $src = implode('/', array_map('rawurlencode', explode('/', $src))); // encode spasi
+    $src = trim($m[2]);
+    if (preg_match('~^(https?:)?//~i', $src)) return $src;
+    $src = preg_replace('~^(\./|\../)+~','',$src);
+    $src = implode('/', array_map('rawurlencode', explode('/', $src)));
     return rtrim($base,'/').'/'.ltrim($src,'/');
   }
 }
 
-}
+// Pastikan fungsi dateindo ada (dibuat ringkas)
 if (!function_exists('dateindo')) {
-  // "D, d M Y" ke Indonesia sederhana
   function dateindo($tanggalInggris) {
     $hari = ['Sun'=>'Minggu','Mon'=>'Senin','Tue'=>'Selasa','Wed'=>'Rabu','Thu'=>'Kamis','Fri'=>'Jumat','Sat'=>'Sabtu'];
     $bulan = ['Jan'=>'Jan','Feb'=>'Feb','Mar'=>'Mar','Apr'=>'Apr','May'=>'Mei','Jun'=>'Jun','Jul'=>'Jul','Aug'=>'Agu','Sep'=>'Sep','Oct'=>'Okt','Nov'=>'Nov','Dec'=>'Des'];
-    $parts = explode(', ', $tanggalInggris);
+    if (strtotime($tanggalInggris) === false) return $tanggalInggris;
+    $tglEn = date('D, d M Y', strtotime($tanggalInggris));
+    $parts = explode(', ', $tglEn);
     if (count($parts) !== 2) return $tanggalInggris;
     [$dEn, $sisa] = $parts;
     $sisaParts = explode(' ', $sisa);
@@ -54,77 +54,82 @@ if (!function_exists('dateindo')) {
     return ($hari[$dEn] ?? $dEn) . ', ' . $tgl . ' ' . ($bulan[$mon] ?? $mon) . ' ' . $yr;
   }
 }
-
-// ======================= DEBUG DIAGNOSTIC (hapus di produksi) =======================
-// mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-// try {
-//   $koneksi->set_charset('utf8mb4');
-//   $dbNow = $koneksi->query("SELECT DATABASE()")->fetch_row()[0] ?? '(unknown)';
-//   $cntArticle = $koneksi->query("SELECT COUNT(*) FROM `article`")->fetch_row()[0];
-//   $hasGalCat  = $koneksi->query("SHOW TABLES LIKE 'galery_categories'")->num_rows;
-//   $hasGal     = $koneksi->query("SHOW TABLES LIKE 'galery'")->num_rows;
-//   echo "<!-- DB OK: $dbNow | article=$cntArticle | galery_categories=".($hasGalCat?'YES':'NO')." | galery=".($hasGal?'YES':'NO')." -->";
-// } catch (Throwable $e) {
-//   echo "<!-- DB ERROR: ".$e->getMessage()." -->";
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>NEW <?php echo htmlspecialchars($title_web, ENT_QUOTES); ?></title>
+<title>NEW <?php echo htmlspecialchars($title_web, ENT_QUOTES); ?> - <?php echo htmlspecialchars($deskripsi_web, ENT_QUOTES); ?></title>
 <meta name="description" content="<?php echo htmlspecialchars($deskripsi_web, ENT_QUOTES); ?>" />
 <meta name="keywords" content="<?php echo htmlspecialchars($keyword_web, ENT_QUOTES); ?>" />
 <meta name="author" content="<?php echo htmlspecialchars($admin_web, ENT_QUOTES); ?>" />
 
-<!-- Base untuk path relatif -->
 <base href="<?php echo MY_PATH; ?>">
 
 <?php include __DIR__ . "/lib/meta_tag.php";?>
 <?php include __DIR__ . "/head.php";?>
 
-<!-- Fallback CSS kalau head.php tidak memuat -->
 <link href="<?php echo MY_PATH; ?>css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 
+<link href="<?php echo MY_PATH; ?>css/style.css" rel="stylesheet">
+
 <style>
-  .section-title h2{ font-weight:700; letter-spacing:.3px }
-  .card{
-    border: 1px solid rgba(0,0,0,.06);
-    border-radius: 1rem;
-    overflow: hidden;
-    transition: transform .18s ease, box-shadow .18s ease;
-    height: 100%;
+  /* Variabel CSS dari style.css (diulang untuk memastikan) */
+  :root{
+    --brand: #22c55e;
+    --brand-2:#86efac;
+    --brand-dark:#16a34a;
+    --ink:#12221a;
+    --line:#e7f5eb;
+    --bg:#ffffff;
+    --soft:#f4fbf6;
   }
-  .card:hover{ transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.08) }
-  .card .card-body{ padding: 1rem 1rem 0.5rem }
-  .card .card-title{ font-size: 1rem; line-height: 1.35; margin-bottom:.35rem }
-  .card .card-text{ font-size:.93rem }
-  .card .card-footer{ background: transparent; border-top: 0; padding: .75rem 1rem 1rem; font-size:.88rem }
 
-  .feature-tile{ border-radius: 1rem; padding: 1.25rem; min-height: 180px; display:flex; align-items:center; justify-content:center; text-align:center; box-shadow: 0 6px 18px rgba(0,0,0,.06); transition: transform .18s, box-shadow .18s }
-  .feature-tile:hover{ transform: translateY(-4px); box-shadow: 0 12px 26px rgba(0,0,0,.08) }
-  .feature-tile h3{ font-size:1.05rem; line-height:1.4; margin:0 }
-  .feature-tile i{ font-size: 1.5rem; margin-right:.35rem; vertical-align:-2px }
-  .video-cover{ background-size: cover; background-position: center; border-radius:1rem; overflow:hidden; box-shadow: 0 10px 24px rgba(0,0,0,.08) }
-  .clients-slider .swiper-slide img{ max-height:68px; width:auto; object-fit:contain }
-
-  .btn{ border-radius:.75rem }
-  .container-narrow{ max-width: 1200px }
-
-  /* Responsif untuk gambar dari cek_img_tag */
-  .object-fit-cover{ object-fit: cover }
+  /* Perbaikan CSS untuk tombol Play agar lebih kontras */
+  #why-us .play-btn::before{
+    /* Ubah warna segitiga play menjadi putih agar kontras */
+    border-color: transparent transparent transparent #ffffff; 
+    margin-left: 6px;
+  }
+  
+  /* Tambahkan efek bayangan pada play-btn untuk menonjolkan dari background */
+  #why-us .play-btn {
+    background: radial-gradient(var(--brand) 60%, rgba(34, 197, 94, .35) 62%);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.4), 0 10px 30px rgba(0,0,0,.25);
+  }
+  
+  /* Tambahan CSS untuk Floating WhatsApp Button */
+  #whatsapp-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1050; /* Pastikan di atas elemen lain (seperti navbar) */
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #25d366; /* WhatsApp Green */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+  }
+  #whatsapp-btn:hover {
+    background-color: #128c7e;
+    transform: scale(1.05);
+  }
 </style>
 </head>
 <body>
 
 <?php include __DIR__ . "/lib/header.php";?>
 
-<!-- ======= Icon Boxes Section (Pricing) ======= -->
 <section id="pricing" class="pricing py-4 py-md-5">
   <div class="container container-narrow">
     <div class="row g-3 g-md-4" role="list">
@@ -167,13 +172,10 @@ if (!function_exists('dateindo')) {
           </div>
         </div>
       </div>
-    </div>  
+    </div>  
   </div>
 </section>
-<!-- End Icon Boxes Section -->
-
-  <!-- ======= Artikel Section ======= -->
-  <div class="container container-narrow">
+<div class="container container-narrow">
   <div class="row align-items-center gy-3">
     <div class="col-lg-6">
       <div class="section-title d-flex align-items-center justify-content-between">
@@ -187,14 +189,14 @@ if (!function_exists('dateindo')) {
     <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100" aria-label="Slider artikel">
       <div class="swiper-wrapper">
         <?php
-        // ==== DATA ====
+        // ==== DATA ARTIKEL ====
         $limit  = isset($show_blog) ? max(1,(int)$show_blog) : 8;
         $page   = isset($_GET['page']) ? max(1,(int)$_GET['page']) : 1;
         $offset = ($page - 1) * $limit;
 
         try {
           $stmt = $koneksi->prepare(
-            "SELECT id_article, title, link_article, content, date
+            "SELECT id_article, title, date
              FROM article
              ORDER BY id_article DESC
              LIMIT ?, ?"
@@ -211,11 +213,9 @@ if (!function_exists('dateindo')) {
               $link    = MY_PATH.'post/'.strip_tags($post['link_article']).'.html';
               $content = (string)$post['content'];
               $img     = first_img_url($content, MY_PATH);
-
-              // tanggal
+              
               $tglRaw  = $post['date'] ?? '';
-              $tglEn   = $tglRaw ? date('D, d M Y', strtotime($tglRaw)) : '';
-              $tglId   = $tglEn ? (function_exists('dateindo') ? dateindo($tglEn) : $tglEn) : '';
+              $tglId   = $tglRaw ? dateindo($tglRaw) : '';
               $excerpt = trim(stripslashes(strip_tags(substr($content, 0, 110))));
         ?>
         <div class="swiper-slide">
@@ -230,7 +230,7 @@ if (!function_exists('dateindo')) {
             <div class="card-body">
               <h4 class="card-title mb-1"><b><?php echo htmlspecialchars($title, ENT_QUOTES); ?></b></h4>
               <h6 class="card-subtitle mb-2 text-muted">
-                <?php echo (isset($datetime) && $datetime==='tgl_standar') ? $tglId : htmlspecialchars($tglRaw, ENT_QUOTES); ?>
+                <?php echo htmlspecialchars($tglId, ENT_QUOTES); ?>
               </h6>
               <p class="card-text mb-3"><?php echo htmlspecialchars($excerpt, ENT_QUOTES); ?>…</p>
               <a href="<?php echo htmlspecialchars($link, ENT_QUOTES); ?>" class="btn btn-success btn-sm">Read More</a>
@@ -252,8 +252,8 @@ if (!function_exists('dateindo')) {
   </div>
 </div>
 
-<!-- ======= Why Us Section ======= -->
-  <section id="why-us" class="why-us">
+<hr>
+<section id="why-us" class="why-us">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch" data-aos="fade-left">
@@ -265,7 +265,6 @@ if (!function_exists('dateindo')) {
           </div>
           <div class="accordion-list">
             <ul>
-              <!-- Item 1: terbuka -->
               <li data-aos="fade-up" data-aos-delay="100">
                 <a data-bs-toggle="collapse" data-bs-target="#accordion-list-1" aria-expanded="true">
                   <span>01</span> Kelebihan 1
@@ -276,7 +275,6 @@ if (!function_exists('dateindo')) {
                   <p>SMA IPB Soedirman 2 Bekasi sekolah favorit unggulan di bekasi.</p>
                 </div>
               </li>
-              <!-- Item 2: tertutup -->
               <li data-aos="fade-up" data-aos-delay="200">
                 <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed" aria-expanded="false">
                   <span>02</span> Kelebihan 2
@@ -287,7 +285,6 @@ if (!function_exists('dateindo')) {
                   <p>Ekstrakulikuler lengkap dan terpadu</p>
                 </div>
               </li>
-              <!-- Item 3: tertutup -->
               <li data-aos="fade-up" data-aos-delay="300">
                 <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed" aria-expanded="false">
                   <span>03</span> Kelebihan 3
@@ -300,26 +297,26 @@ if (!function_exists('dateindo')) {
               </li>
             </ul>
           </div>
-        </div>                
-          <div class="col-lg-5" data-aos="fade-right">
-            <div class="ratio ratio-16x9">
+        </div> 
+        
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="ratio ratio-16x9">
+            <a href="https://youtu.be/wLHgFSxADSI?si=Neq6X4NsdRNTkwtj"
+              class="glightbox" 
+              data-type="video"
+              aria-label="Putar video profil">
               <div class="video-box"
-                  style='background-image:url("https://smaipbsoedirman2bekasi.sch.id/images/slider/pangsoed-min5230617(1)5230617(1).png?1650220925838");'>
-                <a href="https://youtu.be/wLHgFSxADSI?si=Neq6X4NsdRNTkwtj"
-                  class="glightbox play-btn"
-                  data-type="video"
-                  aria-label="Putar video profil"></a>
+                style='background-image:url("https://smaipbsoedirman2bekasi.sch.id/images/slider/pangsoed-min5230617(1)5230617(1).png?1650220925838");'>
+                <div class="play-btn"></div>
                 <span class="video-badge">HD</span>
               </div>
-            </div>
+            </a>
           </div>
+        </div>
       </div>
     </div>
   </section>
-
-<!-- End Why Us Section -->
-
-<!-- ======= Clients / Galeri Foto ======= -->
+<hr>
 <section id="clients" class="clients py-5">
   <div class="container container-narrow" data-aos="zoom-in">
     <div class="section-title text-center mb-4">
@@ -341,36 +338,18 @@ if (!function_exists('dateindo')) {
               $slug         = trim((string)$cat['link_categories']);
               $link_galery  = MY_PATH . "galery-foto/" . $slug;
 
-              // Mode A: categories = slug
-              $stmtA = $koneksi->prepare("SELECT `gambar` FROM `galery` WHERE `categories` = ? ORDER BY `id_galery` DESC LIMIT 1");
-              $stmtA->bind_param('s', $slug);
-              $stmtA->execute();
-              $resA = $stmtA->get_result();
-              $rowA = $resA->fetch_assoc();
-              $stmtA->close();
-
-              $gambar = $rowA['gambar'] ?? null;
-
-              // Mode B (fallback): categories = title
-              if ($gambar === null && $title_galery !== '') {
-                $stmtB = $koneksi->prepare("SELECT * FROM galery WHERE `id_galery` = ? ORDER BY `id_galery` DESC LIMIT 1");
-                $stmtB->bind_param('s', $title_galery);
-                $stmtB->execute();
-                $resB = $stmtB->get_result();
-                $rowB = $resB->fetch_assoc();
-                $stmtB->close();
-
-                $gambar = $rowB['gambar'] ?? null;
+              // Ambil satu gambar dari kategori
+              $gambar = null;
+              if ($stmtA = $koneksi->prepare("SELECT `gambar` FROM `galery` WHERE `categories` = ? ORDER BY `id_galery` DESC LIMIT 1")) {
+                $stmtA->bind_param('s', $slug);
+                $stmtA->execute();
+                $resA = $stmtA->get_result();
+                $rowA = $resA->fetch_assoc();
+                $stmtA->close();
+                $gambar = $rowA['gambar'] ?? null;
               }
-
-              // Jika skema Anda sebenarnya pakai ID kategori:
-              // $catId = (int)$cat['id'];
-              // $stmtI = $koneksi->prepare("SELECT `gambar` FROM `galery` WHERE `categories` = ? ORDER BY `id` DESC LIMIT 1");
-              // $stmtI->bind_param('i', $catId);
-              // $stmtI->execute(); $resI = $stmtI->get_result(); $rowI = $resI->fetch_assoc(); $stmtI->close();
-              // $gambar = $gambar ?? ($rowI['gambar'] ?? null);
-
-              if ($gambar === null) $gambar = 'not-images.png';
+              
+              if ($gambar === null || $gambar === '') $gambar = 'not-images.png';
         ?>
           <div class="swiper-slide">
             <a href="<?php echo htmlspecialchars($link_galery, ENT_QUOTES); ?>"
@@ -393,9 +372,7 @@ if (!function_exists('dateindo')) {
     </div>
   </div>
 </section>
-<!-- End Clients Section -->
-
-<!-- ======= Contact Section ======= -->
+<hr>
 <section id="contact" class="contact py-5">
   <div class="container container-narrow" data-aos="fade-up">
     <div class="section-title text-center">
@@ -409,7 +386,7 @@ if (!function_exists('dateindo')) {
             <i class="bi bi-geo-alt fs-4 me-3"></i>
             <div>
               <h4 class="mb-1">Alamat</h4>
-              <p class="mb-0">Jl. Enau Raya Perum Puri Harapan, Bekasi</p>
+              <p class="mb-0">Jl. Puri Harapan Jl. Enau Raya No.Kel, Setia Asih, Kec. Tarumajaya, Kabupaten Bekasi, Jawa Barat 17215</p>
             </div>
           </div>
           <div class="d-flex align-items-start mb-3">
@@ -483,11 +460,22 @@ if (!function_exists('dateindo')) {
 
   </div>
 </section>
-<!-- End Contact Section -->
 
+<?php
+// GANTI DENGAN NOMOR WHATSAPP ASLI ADMIN (format: 628xxxx)
+$whatsapp_number = '6281234567890'; 
+$whatsapp_text = 'Halo Admin SMAI PB Soedirman 2, saya ingin bertanya tentang PPDB.';
+$whatsapp_link = 'https://wa.me/' . $whatsapp_number . '?text=' . urlencode($whatsapp_text);
+?>
+<a id="whatsapp-btn" 
+   href="<?php echo htmlspecialchars($whatsapp_link, ENT_QUOTES); ?>"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Hubungi kami via WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+</a>
 <?php include __DIR__ . "/lib/footer.php";?>
 
-<!-- ===== JS ===== -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?php echo MY_PATH; ?>js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

@@ -218,108 +218,118 @@ body{
 
 /* ----------------- Why Us & Video ----------------- */
 #why-us{
-  background:
-    radial-gradient(900px 420px at 90% -10%, rgba(134,239,172,.25), transparent 60%),
-    var(--bg);
+background:
+radial-gradient(900px 420px at 90% -10%, rgba(134,239,172,.25), transparent 60%),
+var(--bg);
 }
 .video-card{
-  position:relative; border-radius:1.25rem; overflow:hidden;
-  background: linear-gradient(180deg,#0b132b 0%, #1c2541 100%);
-  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+position:relative; border-radius:1.25rem; overflow:hidden;
+background: linear-gradient(180deg,#0b132b 0%, #1c2541 100%);
+box-shadow: 0 12px 30px rgba(0,0,0,.12);
 }
 .video-thumb{ position:relative; }
 .video-img{ width:100%; height:100%; object-fit:cover; display:block; transition:filter .25s ease; }
 .video-card:hover .video-img{ filter:saturate(1.06) brightness(1.03); }
 
 .video-gradient{
-  position:absolute; left:0; right:0; bottom:0; height:46%;
-  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0));
-  z-index:1;
+position:absolute; left:0; right:0; bottom:0; height:46%;
+background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0));
+z-index:1;
 }
 .video-badge{
-  position:absolute; top:12px; left:12px; z-index:2;
-  background:rgba(0,0,0,.58); color:#fff; font-weight:600;
-  border-radius:.5rem; padding:.25rem .5rem; font-size:.75rem;
-  backdrop-filter: blur(6px);
+position:absolute; top:12px; left:12px; z-index:2;
+background:rgba(0,0,0,.58); color:#fff; font-weight:600;
+border-radius:.5rem; padding:.25rem .5rem; font-size:.75rem;
+backdrop-filter: blur(6px);
 }
 
 .video-play{
-  position:absolute; inset:0; z-index:2; display:grid; place-items:center;
-  text-decoration:none; color:#fff;
+position:absolute; inset:0; z-index:2; display:grid; place-items:center;
+text-decoration:none; color:#fff;
 }
 .video-play i{ font-size:3.1rem; filter: drop-shadow(0 6px 16px rgba(0,0,0,.35)); }
 .video-play .pulse{
-  position:absolute; width:92px; height:92px; border-radius:50%;
-  border:2px solid rgba(255,255,255,.85); animation:pulse 1.8s infinite;
+position:absolute; width:92px; height:92px; border-radius:50%;
+border:2px solid rgba(255,255,255,.85); animation:pulse 1.8s infinite;
 }
 .video-play .pulse.delay{ animation-delay:.7s; }
 @keyframes pulse{
-  0%{ transform:scale(.65); opacity:.95 }
-  70%{ transform:scale(1.28); opacity:0 }
-  100%{ opacity:0 }
+0%{ transform:scale(.65); opacity:.95 }
+70%{ transform:scale(1.28); opacity:0 }
+100%{ opacity:0 }
 }
 
 .video-caption{
-  position:absolute; left:0; right:0; bottom:0; z-index:2;
-  padding:12px 14px; color:#fff; display:flex; flex-direction:column; gap:2px;
+position:absolute; left:0; right:0; bottom:0; z-index:2;
+padding:12px 14px; color:#fff; display:flex; flex-direction:column; gap:2px;
 }
 .video-caption strong{ font-size:1rem; text-shadow:0 1px 8px rgba(0,0,0,.45); }
 .video-caption span{ font-size:.85rem; opacity:.95; }
 /* === VIDEO BOX (pakai background-image) === */
+
+/* **PERBAIKAN 1: Pastikan tag <a> mengambil dimensi penuh** */
+#why-us .ratio a.glightbox {
+position: absolute; 
+inset: 0;
+}
+
 #why-us .video-box{
-  position: relative;
-  width: 100%;
-  height: 100%;                 /* supaya mengikuti tinggi .ratio */
-  background-size: cover;
-  background-position: center;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+position: relative; /* Ini adalah anchor untuk play-btn */
+width: 100%;
+height: 100%; /* supaya mengikuti tinggi .ratio */
+background-size: cover;
+background-position: center;
+border-radius: 1.25rem;
+overflow: hidden;
+box-shadow: 0 12px 30px rgba(0,0,0,.12);
 }
 
 /* overlay gradasi bawah agar teks/ikon jelas */
 #why-us .video-box::after{
-  content:"";
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 55%);
-  pointer-events: none;
+content:"";
+position: absolute; inset: 0;
+background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 55%);
+pointer-events: none;
 }
 
 /* badge kecil pojok kiri atas */
 #why-us .video-badge{
-  position: absolute; top: 10px; left: 10px; z-index: 2;
-  background: rgba(0,0,0,.58); color:#fff; font-weight:600;
-  border-radius:.5rem; padding:.25rem .5rem; font-size:.75rem;
-  backdrop-filter: blur(6px);
+position: absolute; top: 10px; left: 10px; z-index: 2;
+background: rgba(0,0,0,.58); color:#fff; font-weight:600;
+border-radius:.5rem; padding:.25rem .5rem; font-size:.75rem;
+backdrop-filter: blur(6px);
 }
 
 /* tombol play di tengah + animasi pulse */
 #why-us .play-btn{
-  position: absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width: 84px; height: 84px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: radial-gradient(#ffffff 60%, rgba(255,255,255,.35) 62%);
-  box-shadow: 0 10px 30px rgba(0,0,0,.25);
-  z-index: 2; text-decoration: none;
+position: absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+width: 84px; height: 84px; border-radius: 50%;
+display: grid; place-items: center;
+  /* **PERBAIKAN 2: Gunakan Z-index lebih tinggi dan warna kontras** */
+background: radial-gradient(var(--brand) 60%, rgba(34, 197, 94, .35) 62%);
+box-shadow: 0 10px 30px rgba(0,0,0,.25);
+z-index: 10; /* Diperkuat dari 2 menjadi 10 */
+text-decoration: none;
 }
 #why-us .play-btn::before{
-  content:"";
-  border-style: solid;
-  border-width: 14px 0 14px 22px;          /* segitiga */
-  border-color: transparent transparent transparent #0b132b;
-  margin-left: 6px;
+content:"";
+border-style: solid;
+border-width: 14px 0 14px 22px;     /* segitiga */
+/* **PERBAIKAN 3: Ikon segitiga dibuat putih agar kontras** */
+border-color: transparent transparent transparent #ffffff; 
+margin-left: 6px;
 }
 #why-us .play-btn::after{
-  content:"";
-  position:absolute; inset:0;
-  border:2px solid rgba(255,255,255,.85);
-  border-radius:50%;
-  animation:pulse 1.8s infinite;
+content:"";
+position:absolute; inset:0;
+border:2px solid rgba(255,255,255,.85);
+border-radius:50%;
+animation:pulse 1.8s infinite;
 }
 @keyframes pulse{
-  0%{ transform:scale(.65); opacity:.95 }
-  70%{ transform:scale(1.28); opacity:0 }
-  100%{ opacity:0 }
+0%{ transform:scale(.65); opacity:.95 }
+70%{ transform:scale(1.28); opacity:0 }
+100%{ opacity:0 }
 }
 
 
